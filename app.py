@@ -3,6 +3,7 @@ from flask_cors import CORS,cross_origin
 import requests
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen as uReq
+from markupsafe import escape
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def homePage():
     return render_template("index.html")
 
 @app.route('/review',methods=['POST','GET']) # route to show the review comments in a web UI
-@cross_origin()
+@cross_origin() # this is just for cloud deployment , kisi bhi region se access kr sakte hai agr isko use krenge to
 def index():
     if request.method == 'POST':
         try:
@@ -79,5 +80,5 @@ def index():
         return render_template('index.html')
 
 if __name__ == "__main__":
-    #app.run(host='127.0.0.1', port=8001, debug=True)
-	app.run(debug=True)
+    app.run(host='127.0.0.1', port=8001, debug=True)
+	#app.run(debug=True)
